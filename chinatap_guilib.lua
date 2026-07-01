@@ -92,13 +92,33 @@ local FONT_URLS = {
 local KILL_IMAGE_PATH = "chinatap_kill.png"
 local killTexture = nil
 
+local KILL_IMAGE_PATH = "chinatap_kill.png"
+local killTexture = nil
+
 local function loadKillTexture()
-    if not killTexture then
-        local path = M._dir and (M._dir .. "\\chinatap_kill.png") or "chinatap_kill.png"
-        pcall(function()
-            killTexture = draw.CreateTexture(path)
-        end)
+    if killTexture then return killTexture end
+    
+    -- Try multiple paths
+    local paths = {
+        M._dir and (M._dir .. "\\chinatap_kill.png"),
+        "chinatap_kill.png",
+        "C:\\chinatap_kill.png",
+    }
+    
+    for _, path in ipairs(paths) do
+        if path then
+            local ok, tex = pcall(draw.CreateTexture, path)
+            if ok and tex then
+                killTexture = tex
+                print("[chinatap] KILL IMAGE LOADED: " .. path)
+                return killTexture
+            end
+        end
     end
+    
+    print("[chinatap] ERROR: Could not load kill image! Check file location.")
+    return nil
+end
     return killTexture
 end
 
