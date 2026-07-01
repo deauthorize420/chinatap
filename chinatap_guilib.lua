@@ -4,8 +4,8 @@ M.VERSION = "1.0"
 local T = {
     x = 360, y = 200, w = 600, h = 440,
 
-    accent    = { 222, 41, 16 },          -- China red
-    accent_bg = { 80, 20, 20, 255 },      -- dark red
+    accent    = { 222, 41, 16 },
+    accent_bg = { 80, 20, 20, 255 },
     bg        = { 20, 20, 26, 255 },
     bg2       = { 15, 15, 20, 255 },
     section   = { 25, 25, 32, 255 },
@@ -31,7 +31,7 @@ local T = {
     notif_w      = 290,
     notif_margin = 18,
     notif_life   = 3.5,
-    notif_info    = { 222, 41, 16 },      -- matches accent
+    notif_info    = { 222, 41, 16 },
     notif_success = { 80, 200, 120 },
     notif_error   = { 235, 90, 90 },
 }
@@ -1002,7 +1002,7 @@ M._hitlog = {
     max       = 6,
     colors    = {
         miss = { 235, 90, 90 },
-        hit  = { 222, 41, 16 },         -- red accent
+        hit  = { 139, 124, 246 },
         hurt = { 245, 170, 70 },
         kill = { 80, 200, 120 },
     },
@@ -1012,7 +1012,7 @@ M._watermark = {
     enabled    = false,
     parts      = { cheat = false, lua = true, user = false, nick = true, fps = true, ping = true },
     cheat_name = "AIMWARE.NET",
-    lua_name   = "CHINATAP.CC",
+    lua_name   = "CHINATAP.CN",
     user       = nil,
     nick       = nil,
     ping       = nil,
@@ -1160,7 +1160,7 @@ end
 local HITLOG_DEMO = {
     { kind = "hit",  label = "+2137 social credits for hitting player in head for 90hp" },
     { kind = "hurt", label = "-67 social credits for getting hurt by player in chest for 20hp" },
-    { kind = "miss", label = "-420 social credits for missing a shot" },
+    { kind = "miss", label = "-420 social credits for a missed shot" },
     { kind = "kill", label = "+420 social credits for killing player in head for 100hp" },
 }
 local HL_SNAP_IN, HL_SNAP_OUT, HL_DEAD = 12, 18, 28
@@ -1314,7 +1314,7 @@ function M:_drawHitlog()
         if self._open ~= false then
             hitlogEdit(hl, sw, sh, cx, cy, rowH, gap, reveal, row)
         else
-            -- fallback demo
+
             local x, y = hitlogPos(hl, sw, sh)
             local n = #HITLOG_DEMO
             local cyTop = y
@@ -1385,7 +1385,7 @@ function M:_drawWatermark()
 
     local segs = {}
     if wm.parts.cheat then segs[#segs + 1] = nameSeg(wm.cheat_name or "AIMWARE.NET") end
-    if wm.parts.lua   then segs[#segs + 1] = nameSeg(wm.lua_name or "CHINATAP.CC") end
+    if wm.parts.lua   then segs[#segs + 1] = nameSeg(wm.lua_name or "CHINATAP.CN") end
     if wm.parts.user  then segs[#segs + 1] = { { tostring(wm.user or "?"), T.text, FONT } } end
     if wm.parts.nick  then segs[#segs + 1] = { { tostring(wm.nick or "?"), T.text, FONT } } end
     if wm.parts.fps   then segs[#segs + 1] = { { floor(wm._fps + 0.5) .. " fps", T.text, FONT } } end
@@ -1842,7 +1842,7 @@ function M:Build(opts)
         pcall(function() cmd:SetButtons(0) end)
     end) end)
 
-    print(string.format("[chinatap.cc] guilib v%s ready: %d tabs, mouse=%s clock=%s",
+    print(string.format("[chinatap.cn] guilib v%s ready: %d tabs, mouse=%s clock=%s",
         tostring(M.VERSION), #self._tabs, _getMouse and "ok" or "NIL", _clock and "ok" or "NIL"))
     return self
 end
