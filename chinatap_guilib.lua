@@ -18,7 +18,7 @@ local T = {
     widgethi  = { 45, 45, 57, 255 },
 
     title     = "CHINATAP",
-    title_tld = ".CC",
+    title_tld = ".CN",
     titlebar  = 44,
     pad       = 14,
     sec_gap   = 12,
