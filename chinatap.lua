@@ -102,7 +102,7 @@ ncOn = ui.CheckBox(grp9, "Enable") ncMode = ui.ComboBox(grp9, "Mode", { "Static"
 path) end end) ncText = ui.TextEntry(grp9, "File") ncSpeed = ui.Slider(grp9, 
 "Speed", 1, 20, 5, 1) local grp10 = ui.Group(t4, "Vote Reset") vrOn = 
 ui.CheckBox(grp10, "Enable") vrMode = ui.ComboBox(grp10, "Mode", { "Instant", 
-"On Vote" }) end setupUI() local function getVM() if not cbVm:Get() then return 
+"On Vote" }) end end setupUI() local function getVM() if not cbVm:Get() then return 
 end local w = item() if not w then return end local id = w.id or 0 local x = 
 vmX:Get() local y = vmY:Get() local z = vmZ:Get() if x == 0 and y == 0 and z == 0
 then return end return id, x, y, z end local function getHS() if not hsOn:Get() 
