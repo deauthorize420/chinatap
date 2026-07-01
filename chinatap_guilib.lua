@@ -94,8 +94,9 @@ local killTexture = nil
 
 local function loadKillTexture()
     if not killTexture then
+        local path = M._dir and (M._dir .. "\\chinatap_kill.png") or "chinatap_kill.png"
         pcall(function()
-            killTexture = draw.CreateTexture(KILL_IMAGE_PATH)
+            killTexture = draw.CreateTexture(path)
         end)
     end
     return killTexture
