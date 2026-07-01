@@ -3,8 +3,7 @@ local BASE = rawget(_G, "CHINA_BASE") or
 local GUILIB_URL = BASE .. "chinatap_guilib.lua" local CHANGER_URL = BASE .. 
 "chinatap_changer.lua" local ffi = rawget(_G, "ffi") local function r_ptr(a) 
 return tonumber(ffi.cast("uint64_t*", a)[0]) end local function valid(p) return 
-p ~= nil and p > 0x10000 and p < 0x7FFFFFFFFFFF end local SIG = { vm = "E8 ?? ??
-?? ?? 48 8B CB E8 ?? ?? ?? ?? 84 C0 74 11 F3 0F 10 45 B0", } local function 
+p ~= nil and p > 0x10000 and p < 0x7FFFFFFFFFFF end local SIG = { vm = "E8 ?? ?? ?? ?? 48 8B CB E8 ?? ?? ?? ?? 84 C0 74 11 F3 0F 10 45 B0", } local function 
 fetch(url, cacheFile) local src local bust = url .. "?nocache=" .. 
 tostring({}):gsub("%W", "") pcall(function() src = http.Get(bust) end) if 
 type(src) ~= "string" or #src <= 500 then pcall(function() src = http.Get(url) 
