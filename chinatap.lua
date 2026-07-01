@@ -74,10 +74,9 @@ weaponLb = ui.ComboBox(grp1, "Weapon", C.items) weaponLb:Set(0)
 weaponLb.OnChange = onWeaponChange skinLb = ui.ComboBox(grp1, "Skin", {}) 
 skinLb.OnChange = onSkinChange skinWd = ui.Button(grp1, "Update", function() 
 updateSkins() end) sWear = ui.TextEntry(grp1, "Wear") sSeed = ui.TextEntry(grp1,
-"Seed") cbAuto = ui.CheckBox(grp1, "Auto") local grp2 = ui.Group(t1, [[Model Changer]]) modelLb = ui.ComboBox(grp2, "Model", {}) modelLb.OnChange = 
+"Seed") cbAuto = ui.CheckBox(grp1, "Auto") local grp2 = ui.Group(t1, [[Model Changer]]) modelLb = ui.ComboBox(grp2, [[Model]], {}) modelLb.OnChange = 
 onModelChange modelWd = ui.Button(grp2, "Update", function() updateModels() end)
-modelPaths = ui.MultiTextEntry(grp2, "Paths") local grp3 = ui.Group(t1, [[Viewmodel
-]]) cbVm = ui.CheckBox(grp3, "Enable") vmX = ui.Slider(grp3, "X", -10, 10, 0, 0.1)
+modelPaths = ui.MultiTextEntry(grp2, "Paths") local grp3 = ui.Group(t1, [[Viewmodel]]) cbVm = ui.CheckBox(grp3, "Enable") vmX = ui.Slider(grp3, "X", -10, 10, 0, 0.1)
 vmY = ui.Slider(grp3, "Y", -10, 10, 0, 0.1) vmZ = ui.Slider(grp3, "Z", -10, 10, 0,
 0.1) local grp4 = ui.Group(t2, "Hit Sound") hsOn = ui.CheckBox(grp4, "Enable") 
 hsCmb = ui.ComboBox(grp4, "Sound", { "Default", "Custom" }) hsCmbWd = ui.Button(
