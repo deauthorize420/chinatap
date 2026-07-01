@@ -89,7 +89,7 @@ local FONT_URLS = {
     { file = "chinatap_SpaceGrotesk.ttf", url = "https://cdn.jsdelivr.net/gh/google/fonts@main/ofl/spacegrotesk/SpaceGrotesk%5Bwght%5D.ttf" },
 }
 
-local KILL_IMAGE_PATH = "chinatap_kill.png"   -- place in chinatap_lua folder
+local KILL_IMAGE_PATH = "chinatap_kill.png"
 local killTexture = nil
 
 local function loadKillTexture()
@@ -1834,18 +1834,19 @@ function M:Build(opts)
         pcall(function() self:_drawToasts() end)
         pcall(function() self:_drawHitlog() end)
         pcall(function() self:_drawWatermark() end)
-    if flashAlpha > 0 then
-        local tex = loadKillTexture()
-        if tex then
-            local sw, sh = draw.GetScreenSize()
-            draw.SetTexture(tex)
-            draw.Color(255, 255, 255, flashAlpha * 255)
-            draw.FilledRect(0, 0, sw, sh)
-            draw.SetTexture(nil)
+            
+        if flashAlpha > 0 then
+            local tex = loadKillTexture()
+            if tex then
+                local sw, sh = draw.GetScreenSize()
+                draw.SetTexture(tex)
+                draw.Color(255, 255, 255, flashAlpha * 255)
+                draw.FilledRect(0, 0, sw, sh)
+                draw.SetTexture(nil)
+            end
+            flashAlpha = flashAlpha - DT * 2
+            if flashAlpha < 0 then flashAlpha = 0 end
         end
-        flashAlpha = flashAlpha - DT * 2
-        if flashAlpha < 0 then flashAlpha = 0 end
-    end
 
         ALPHA = 1
         for _, fn in ipairs(self._onframe) do pcall(fn, UI) end
