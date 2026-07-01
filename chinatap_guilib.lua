@@ -65,6 +65,8 @@ end
 local ALPHA = 1
 local DT = 0
 local clipTop, clipBottom
+local flashAlpha = 0
+local flashImage = nil
 
 local function approach(cur, target, speed)
     return cur + (target - cur) * clamp(DT * speed, 0, 1)
@@ -86,6 +88,18 @@ local FONT_URLS = {
     { file = "chinatap_Orbitron.ttf",     url = "https://cdn.jsdelivr.net/gh/google/fonts@main/ofl/orbitron/Orbitron%5Bwght%5D.ttf" },
     { file = "chinatap_SpaceGrotesk.ttf", url = "https://cdn.jsdelivr.net/gh/google/fonts@main/ofl/spacegrotesk/SpaceGrotesk%5Bwght%5D.ttf" },
 }
+
+local KILL_IMAGE_PATH = "chinatap_kill.png"   -- place in chinatap_lua folder
+local killTexture = nil
+
+local function loadKillTexture()
+    if not killTexture then
+        pcall(function()
+            killTexture = draw.CreateTexture(KILL_IMAGE_PATH)
+        end)
+    end
+    return killTexture
+end
 
 local FONT, FONT_B, FONT_LOGO
 local function initFonts()
@@ -1820,6 +1834,18 @@ function M:Build(opts)
         pcall(function() self:_drawToasts() end)
         pcall(function() self:_drawHitlog() end)
         pcall(function() self:_drawWatermark() end)
+    if flashAlpha > 0 then
+        local tex = loadKillTexture()
+        if tex then
+            local sw, sh = draw.GetScreenSize()
+            draw.SetTexture(tex)
+            draw.Color(255, 255, 255, flashAlpha * 255)
+            draw.FilledRect(0, 0, sw, sh)
+            draw.SetTexture(nil)
+        end
+        flashAlpha = flashAlpha - DT * 2
+        if flashAlpha < 0 then flashAlpha = 0 end
+    end
 
         ALPHA = 1
         for _, fn in ipairs(self._onframe) do pcall(fn, UI) end
